@@ -1,86 +1,292 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loops Assignment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink-50: #fff5f8;
+      --pink-100: #fce4ec;
+      --pink-200: #f8bbd0;
+      --pink-300: #f48fb1;
+      --pink-text: #7e4f73;
+      --pink-muted: #b07ab5;
+      --pink-light: #c48bbf;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(160deg, #fce4ec 0%, #f3e5f5 60%, #e8eaf6 100%);
+      min-height: 100vh;
+      color: var(--pink-text);
+      padding: 2.5rem 1.25rem 3rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, #f48fb1, #ce93d8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: white; font-weight: 500;
+      font-family: 'Playfair Display', serif;
+      text-decoration: none;
+    }
+    .back-link {
+      font-size: 12px;
+      color: var(--pink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--pink-text); }
+
+    main {
+      max-width: 580px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    .section-label {
+      font-size: 11px; font-weight: 500; color: var(--pink-light);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 0.75rem; padding-left: 2px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; font-weight: 500;
+      color: var(--pink-text);
+      margin-bottom: 0.35rem;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: var(--pink-muted);
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid var(--pink-200);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--pink-300); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .card-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--pink-50);
+      border: 0.5px solid var(--pink-200);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 500;
+      color: var(--pink-text);
+    }
+
+    /* Number output bubbles */
+    .number-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0.9rem 1rem;
+      background: var(--pink-50);
+      border: 0.5px solid var(--pink-200);
+      border-radius: var(--radius-sm);
+    }
+    .num {
+      font-size: 12px; font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: var(--pink-100);
+      color: var(--pink-text);
+    }
+
+    /* Result row */
+    .result-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--pink-50);
+      border: 0.5px solid var(--pink-200);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+    }
+    .result-label { color: var(--pink-muted); }
+    .result-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--pink-text);
+    }
+
+    /* Concept note */
+    .concept {
+      margin-top: 0.85rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      background: #f3e5f5;
+      border: 0.5px solid #e1bee7;
+      font-size: 12px;
+      color: var(--pink-muted);
+      line-height: 1.65;
+    }
+    .concept strong { color: var(--pink-text); font-weight: 500; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+    .tag {
+      font-size: 10px; font-weight: 500; padding: 2px 9px;
+      border-radius: 20px; background: #f3e5f5; color: var(--pink-text);
+    }
+
+    footer {
+      text-align: center; font-size: 12px;
+      color: var(--pink-light); padding-top: 2rem;
+      border-top: 0.5px solid var(--pink-200);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
 <body>
 
-<h2>PHP Loops Assignment</h2>
+<nav>
+  <a href="https://stephanieperez1422.github.io/my-portfolio/" class="avatar">S</a>
+  <a href="https://stephanieperez1422.github.io/my-portfolio/" class="back-link">← back to portfolio</a>
+</nav>
+
+<main>
+  <p class="section-label">🔁 loops assignment</p>
+  <h1>Loops Assignment</h1>
+  <p class="subtitle">Demonstrates for, while, and do-while loops with sum and product calculations.</p>
+
+  <!-- For Loop -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">1️⃣</div>
+      <div class="card-title">For Loop (1–18)</div>
+    </div>
+    <div class="number-wrap" id="for-loop"></div>
+    <div class="concept"><strong>For loop</strong> — used when you know exactly how many times to repeat. <code>for(start; condition; increment)</code></div>
+  </div>
+
+  <!-- While Loop -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">2️⃣</div>
+      <div class="card-title">While Loop (1–27)</div>
+    </div>
+    <div class="number-wrap" id="while-loop"></div>
+    <div class="concept"><strong>While loop</strong> — runs as long as the condition is true. Use when you don't know exactly how many times to repeat.</div>
+  </div>
+
+  <!-- Do-While Loop -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">3️⃣</div>
+      <div class="card-title">Do-While Loop (1–15)</div>
+    </div>
+    <div class="number-wrap" id="dowhile-loop"></div>
+    <div class="concept"><strong>Do-while loop</strong> — runs the code first, then checks the condition. Always executes at least once.</div>
+  </div>
+
+  <!-- Sum of Odd Numbers -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">➕</div>
+      <div class="card-title">Sum of Odd Numbers (2–21)</div>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Sum of odd numbers between 2 and 21</span>
+      <span class="result-value" id="sum-result"></span>
+    </div>
+    <div class="concept"><strong>Modulus ( % )</strong> — gives the remainder of division. If <code>k % 2 != 0</code> → it's odd!</div>
+  </div>
+
+  <!-- Product of Even Numbers -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">✖️</div>
+      <div class="card-title">Product of Even Numbers (3–17)</div>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Product of even numbers between 3 and 17</span>
+      <span class="result-value" id="product-result"></span>
+    </div>
+    <div class="concept"><strong>Product starts at 1</strong> — not 0, because anything × 0 = 0. If <code>m % 2 == 0</code> → it's even!</div>
+  </div>
+
+  <div class="tags">
+    <span class="tag">JavaScript</span>
+    <span class="tag">HTML</span>
+    <span class="tag">For Loop</span>
+    <span class="tag">While Loop</span>
+    <span class="tag">Do-While</span>
+  </div>
+</main>
+
+<footer>made with love · stephanie's portfolio</footer>
 
 <script>
+  // 1) For Loop (1 to 18)
+  const forEl = document.getElementById('for-loop');
+  for (let i = 1; i <= 18; i++) {
+    forEl.innerHTML += `<span class="num">${i}</span>`;
+  }
 
-// ========== 1) FOR LOOP (1 to 18) ==========
-// A for loop is used when you know how many times to repeat
-// for(start; condition; increment)
+  // 2) While Loop (1 to 27)
+  const whileEl = document.getElementById('while-loop');
+  let i = 1;
+  while (i <= 27) {
+    whileEl.innerHTML += `<span class="num">${i}</span>`;
+    i++;
+  }
 
-document.write("<h3>1. For Loop (1-18)</h3>");
-
-for(let i = 1; i <= 18; i++) {
-    // let i = 1 → starting point
-    // i <= 18 → keep going until i reaches 18
-    // i++ → add 1 each time
-    document.write(i + " ");
-}
-
-// ========== 2) WHILE LOOP (1 to 27) ==========
-// A while loop runs AS LONG AS the condition is true
-// Use this when you don't know exactly how many times to repeat
-
-document.write("<h3>2. While Loop (1-27)</h3>");
-
-let i = 1; // start value
-
-while (i <= 27) {
-    document.write(i + " ");
-    i++; // Very important → without this it loops forever!
-}
-
-// ========== 3) DO-WHILE LOOP (1 to 15) ==========
-// Runs the code FIRST, then checks the condition
-// Difference from while → this always runs at least once
-
-document.write("<h3>3. Do-While Loop (1-15)</h3>");
-
-let j = 1; // using j instead of i because i is already declared above
-
-do {
-    document.write(j + " ");
+  // 3) Do-While Loop (1 to 15)
+  const doWhileEl = document.getElementById('dowhile-loop');
+  let j = 1;
+  do {
+    doWhileEl.innerHTML += `<span class="num">${j}</span>`;
     j++;
-} while (j <= 15);
+  } while (j <= 15);
 
-// ========== 4) SUM OF ODD NUMBERS (2 to 21) ==========
-// We loop through 2 to 21 and only add the ODD numbers
-// % is called modulus → gives you the REMAINDER of division
-// Example: 7 % 2 = 1 (remainder) → odd!
-// Example: 6 % 2 = 0 (no remainder) → even!
+  // 4) Sum of Odd Numbers (2 to 21)
+  let sum = 0;
+  for (let k = 2; k <= 21; k++) {
+    if (k % 2 != 0) sum += k;
+  }
+  document.getElementById('sum-result').textContent = sum;
 
-document.write("<h3>4. Sum of Odd Numbers (2-21)</h3>");
-
-let sum = 0; // start total at 0
-
-for (let k = 2; k <= 21; k++) {
-    if (k % 2 != 0) { // if remainder is NOT 0 → it's odd
-        sum += k; // same as: sum = sum + k
-    }
-}
-
-document.write("Sum = " + sum);
-
-// ========== 5) PRODUCT OF EVEN NUMBERS (3 to 17) ==========
-// We loop through 3 to 17 and only MULTIPLY the EVEN numbers
-// Start product at 1, NOT 0 → because anything x 0 = 0!
-
-document.write("<h3>5. Product of Even Numbers (3-17)</h3>");
-
-let product = 1;
-
-for (let m = 3; m <= 17; m++) {
-    if (m % 2 == 0) { // if remainder IS 0 → it's even
-        product *= m; // same as: product = product * m
-    }
-}
-
-document.write("Product = " + product);
-
+  // 5) Product of Even Numbers (3 to 17)
+  let product = 1;
+  for (let m = 3; m <= 17; m++) {
+    if (m % 2 == 0) product *= m;
+  }
+  document.getElementById('product-result').textContent = product;
 </script>
 
 </body>
 </html>
-
